@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/game.dir/main.cpp.o  -o game  libcharacter.a libengine.a 

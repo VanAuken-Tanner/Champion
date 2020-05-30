@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcharacter.a  CMakeFiles/character.dir/character.cpp.o CMakeFiles/character.dir/player.cpp.o CMakeFiles/character.dir/enemy.cpp.o CMakeFiles/character.dir/enemyGenerator.cpp.o
+/usr/bin/ranlib libcharacter.a
