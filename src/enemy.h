@@ -4,6 +4,7 @@
 
 
 #include "character.h"
+#include "STATS.h"
 
 enum EnemyType
 {
@@ -19,7 +20,7 @@ enum EnemyType
 class Enemy : public Character
 {
 public:
-    Enemy(EnemyType eType, int hp, int strength, int speed) : Character(hp, strength, speed), enType_{eType} {}
+    Enemy(EnemyType eType, int hp, int str, int def, int agi, int wil, int spd, int luck) : Character(hp, str, def, agi, wil, spd, luck), enType_{eType} {}
 
     void printProfile();
     std::string GetEnemyName();

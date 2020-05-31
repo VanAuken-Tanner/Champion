@@ -3,7 +3,7 @@
 #include "character.h"
 #include <string>
 
-enum ROLE
+enum CLASS
 {
     PEASANT,
     GOD,
@@ -11,7 +11,7 @@ enum ROLE
     ARCHER,
     SORCERER,
     MAGE,
-    WARRIOR,
+    KNIGHT,
     BARBARIAN 
 };
 
@@ -23,23 +23,32 @@ enum STATE
     RUNNING
 };
 
+
+
 class Player : public Character
 {
 
 public:
     Player();
-    Player(std::string name, ROLE role, int hp, int strength, int speed) : Character(hp, strength, speed), name_{name}, role_{role} {}
+    Player(std::string name, CLASS newclass) : Character(), name_{name}, class_{newclass} {}
     void InitPlayer();
     void printProfile();
     std::string GetRoleName();
     std::string GetName() {return name_;};
     void FullHeal() {hpcur_ = hpmax_;};
 
+    int GetAttacked(int dmg);
+    int Attack();
+    int Defend();
+    
+
+
+
 private:
     std::string GetNewName();
     bool GetAnswer(std::string msg, std::string opt1, std::string opt2);
-    ROLE GetPlayerClass();
-    ROLE role_;
+    CLASS GetPlayerClass();
+    CLASS class_;
     std::string name_;
     STATE state_;
 };

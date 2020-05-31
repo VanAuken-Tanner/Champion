@@ -1,6 +1,12 @@
 #pragma once
 #include <string>
 
+
+#define QUARTER_SECOND      250
+#define HALF_SECOND         500
+#define FULL_SECOND         1000
+#define THREE_SECONDS       3000
+
 //static class for writing to the screen
 class GraphicsManager
 {

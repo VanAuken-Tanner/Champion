@@ -6,10 +6,9 @@
 #include <chrono>
 #include <thread>
 
-#define QUARTER_SECOND      250
-#define HALF_SECOND         500
-#define FULL_SECOND         1000
-#define THREE_SECONDS       3000
+#include "dice.h"
+
+
 
 void GraphicsManager::RefreshPage()
 {
@@ -113,7 +112,11 @@ void GraphicsManager::PrintCombat(bool success, bool isplayer, std::string attac
         std::cout << GetRandomCombatString() << std::endl;
         GraphicsManager::NewLine();
     }
-    std::cout << attacker << " hit " << defender << " for " << dmg << "!" << std::endl;
+    if(dmg > 0)
+        std::cout << attacker << " hit " << defender << " for " << dmg << "!" << std::endl;
+    else
+        std::cout << defender << " was lucky enough that " << attacker << " fumbled!" << std::endl;
+
     GraphicsManager::PrintLine();
     GraphicsManager::MilliWait(THREE_SECONDS);
     GraphicsManager::RefreshPage();
@@ -123,14 +126,8 @@ void GraphicsManager::PrintCombat(bool success, bool isplayer, std::string attac
 //TODO this should be somewhere else
 std::string GraphicsManager::GetRandomCombatString()
 {
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::mt19937 generator(seed);
-
-    std::uniform_int_distribution<uint16_t> roller(0,9);
-
-    std::string result = "invalid";
-
-    int rand = roller(generator);
+    int rand = Dice::GetDice()->Roll(0,9);
+    std::string result = "";
 
     switch (rand)
     {

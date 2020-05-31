@@ -4,6 +4,8 @@
 #include <random>
 #include <chrono>
 
+#include "dice.h"
+
 //Generates enemies based on the users current level
 void EnemyGenerator::GenerateEnemies(std::vector<Enemy> &vEnemies, int level)
 {
@@ -87,7 +89,7 @@ void EnemyGenerator::GenerateEnemies(std::vector<Enemy> &vEnemies, int level)
 
 Enemy EnemyGenerator::GenEnemy(EnemyType type)
 {
-    Enemy newEnemy(type, GenEnemyHP(type), GenEnemySTR(type), GenEnemySPD(type));
+    Enemy newEnemy(type, GenEnemyHP(type), GenEnemySTR(type), 0, 0, 0, GenEnemySPD(type), 0);
     return newEnemy;
 }
 
@@ -139,31 +141,23 @@ int EnemyGenerator::GenerateEnemiesForLevel(int level)
         }
     }
 
-    return GenRandNum(min,max);
+    return Dice::GetDice()->Roll(min,max);
 }
 
-int EnemyGenerator::GenRandNum(int min, int max)
-{
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::mt19937 generator(seed);
 
-    std::uniform_int_distribution<uint16_t> roller(min, max);
-
-    return roller(generator);
-}
 
 int EnemyGenerator::GenEnemyHP(EnemyType type)
 {
     switch (type)
     {
     case EnemyType::GOBLIN:
-        return GenRandNum(GOBLIN_MIN_HP, GOBLIN_MAX_HP);
+        return Dice::GetDice()->Roll(GOBLIN_BASE_HP, GOBLIN_BASE_HP);
         break;
     case EnemyType::SKELETON:
-        return GenRandNum(SKELETON_MIN_HP, SKELETON_MAX_HP);
+        return Dice::GetDice()->Roll(SKELETON_BASE_HP, SKELETON_BASE_HP);
         break;
     case EnemyType::WRAITH:
-        return GenRandNum(WRAITH_MIN_HP, WRAITH_MAX_HP);
+        return Dice::GetDice()->Roll(WRAITH_BASE_HP, WRAITH_BASE_HP);
         break;
     default:
         break;
@@ -176,13 +170,13 @@ int EnemyGenerator::GenEnemySTR(EnemyType type)
     switch (type)
     {
     case EnemyType::GOBLIN:
-        return GenRandNum(GOBLIN_MIN_STR, GOBLIN_MAX_STR);
+        return Dice::GetDice()->Roll(GOBLIN_BASE_STR, GOBLIN_BASE_STR);
         break;
     case EnemyType::SKELETON:
-        return GenRandNum(SKELETON_MIN_STR, SKELETON_MAX_STR);
+        return Dice::GetDice()->Roll(SKELETON_BASE_STR, SKELETON_BASE_STR);
         break;
     case EnemyType::WRAITH:
-        return GenRandNum(WRAITH_MIN_STR, WRAITH_MAX_STR);
+        return Dice::GetDice()->Roll(WRAITH_BASE_STR, WRAITH_BASE_STR);
         break;
     default:
         break;
@@ -195,33 +189,16 @@ int EnemyGenerator::GenEnemySPD(EnemyType type)
     switch (type)
     {
     case EnemyType::GOBLIN:
-        return GenRandNum(GOBLIN_MIN_SPD, GOBLIN_MAX_SPD);
+        return Dice::GetDice()->Roll(GOBLIN_BASE_SPD, GOBLIN_BASE_SPD);
         break;
     case EnemyType::SKELETON:
-        return GenRandNum(SKELETON_MIN_SPD, SKELETON_MAX_SPD);
+        return Dice::GetDice()->Roll(SKELETON_BASE_SPD, SKELETON_BASE_SPD);
         break;
     case EnemyType::WRAITH:
-        return GenRandNum(WRAITH_MIN_SPD, WRAITH_MAX_SPD);
+        return Dice::GetDice()->Roll(WRAITH_BASE_SPD, WRAITH_BASE_SPD);
         break;
     default:
         break;
     }
     return -1;
-}
-
-void EnemyGenerator::GenerateSomeRandomNumbers()
-{
-    std::cout << "generating random numbers" << std::endl;
-    int num = 0;
-    int max = 100;
-    int min = 1;
-
-    for (int i = 0; i < 20; i++)
-    {
-
-        int num = GenRandNum(min, max);
-        std::cout << num << std::endl;
-    }
-
-    std::cout << "done generating random numbers" << std::endl;
 }

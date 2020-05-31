@@ -1,7 +1,0 @@
-/home/quiktrix/develpment_base/battle/build/CMakeFiles/rebuild_cache.dir
-/home/quiktrix/develpment_base/battle/build/CMakeFiles/edit_cache.dir
-/home/quiktrix/develpment_base/battle/build/src/CMakeFiles/rebuild_cache.dir
-/home/quiktrix/develpment_base/battle/build/src/CMakeFiles/engine.dir
-/home/quiktrix/develpment_base/battle/build/src/CMakeFiles/edit_cache.dir
-/home/quiktrix/develpment_base/battle/build/src/CMakeFiles/game.dir
-/home/quiktrix/develpment_base/battle/build/src/CMakeFiles/character.dir

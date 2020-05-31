@@ -114,7 +114,7 @@ void BattleManager::RunEnemyTurn()
 {
     for (int i = 0; i < enemies_->size(); i++)
     {
-        int dmg = player_->TakeHit(enemies_->at(i).GetSTR());
+        int dmg = player_->GetAttacked(enemies_->at(i).GetSTR());
         GraphicsManager::PrintCombat(true,false,enemies_->at(i).GetEnemyName(), player_->GetName(), dmg);
     }
     currentPhase_ = BATTLEPHASE::ESTATUS;
@@ -227,7 +227,7 @@ void BattleManager::CommitCommand(COMMAND command)
     case COMMAND::ATTACK:
     {
         int enemyIndex = GetTargetOfAttack();
-        int dmgDealt = enemies_->at(enemyIndex).TakeHit(player_->GetSTR());
+        int dmgDealt = enemies_->at(enemyIndex).TakeHit(player_->Attack());
         GraphicsManager::PrintCombat(true, true,player_->GetName(), enemies_->at(enemyIndex).GetEnemyName(), dmgDealt);
         currentPhase_ = BATTLEPHASE::PSTATUS;
         break;

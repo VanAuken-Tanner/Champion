@@ -13,15 +13,17 @@
 //gets to fight hordes of baddies!
 
 //MAIN TODO
-//Create player classes and abilities
+//Create player abilities
 //Create player attack that utilizes random damage + modifiers.
 //add armor to characters
+//add xp and items to character
+//add a status phase and menu
 
 //create difficulty system (levels)
 
 bool Continue()
 {
-    std::cout << "Continue?..." << std::endl;
+    std::cout << "Continue?(y/n)..." << std::endl;
     std::string input;
     std::cin >> input;
 
@@ -41,8 +43,8 @@ int main(int argc, char *argv[])
     GraphicsManager::Opening();
 
     Player player;
-    //player.printProfile();
-    //running = Continue();
+    player.printProfile();
+    Continue();
 
     while (running)
     {
