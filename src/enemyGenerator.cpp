@@ -4,19 +4,142 @@
 #include <random>
 #include <chrono>
 
-void EnemyGenerator::GenerateEnemies(std::vector<Enemy> &vEnemies)
+//Generates enemies based on the users current level
+void EnemyGenerator::GenerateEnemies(std::vector<Enemy> &vEnemies, int level)
 {
-    //Generate a number of enemies
-    int numEnemies = GenRandNum(2, 4);
-
-    for (int i = 0; i < numEnemies; i++)
+    vEnemies.clear();
+    //int min = 0; int max = 0;
+    switch (level)
     {
-        EnemyType type = GenEnemyType();
-
-        Enemy newEnemy(type, GenEnemyHP(type), GenEnemySTR(type), GenEnemySPD(type));
-
-        vEnemies.emplace_back(newEnemy);
+        case 1:
+        case 2://goblins
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            break;
+        }
+        case 3:
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::SKELETON));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            break;
+        }
+        case 4://skeletons and goblins
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::SKELETON));
+            vEnemies.emplace_back(GenEnemy(EnemyType::SKELETON));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            break;
+        }
+        case 5://wraith
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::WRAITH));
+            vEnemies.emplace_back(GenEnemy(EnemyType::WRAITH));
+            break;
+        }
+        case 6:
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::SKELETON));
+            vEnemies.emplace_back(GenEnemy(EnemyType::WRAITH));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            break;
+        }
+        case 7://goblins and skeletons and wraiths
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::WRAITH));
+            vEnemies.emplace_back(GenEnemy(EnemyType::SKELETON));
+            vEnemies.emplace_back(GenEnemy(EnemyType::WRAITH));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            break;
+        }
+        case 8:// many small enemies
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            vEnemies.emplace_back(GenEnemy(EnemyType::GOBLIN));
+            break;
+        }
+        case 9://cyclops
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::CYCLOPS));
+            vEnemies.emplace_back(GenEnemy(EnemyType::CYCLOPS));
+            break;
+        }
+        case 10://dragon
+        {
+            vEnemies.emplace_back(GenEnemy(EnemyType::DRAGON));
+            break;
+        }
     }
+}
+
+Enemy EnemyGenerator::GenEnemy(EnemyType type)
+{
+    Enemy newEnemy(type, GenEnemyHP(type), GenEnemySTR(type), GenEnemySPD(type));
+    return newEnemy;
+}
+
+int EnemyGenerator::GenerateEnemiesForLevel(int level)
+{
+    int min = 0; int max = 0;
+
+    switch (level)
+    {
+        case 0:
+        case 1:
+        case 2://goblins
+        {
+            min = 2;
+            max = 3;
+            break;
+        }
+        case 3:
+        case 4://skeletons and goblins
+        {
+            min = 4;
+            max = 5;
+            break;
+        }
+        case 5://wraith
+        {
+            min = max = 3;
+            break;
+        }
+        case 6:
+        case 7://goblins and skeletons and wraiths
+        {
+            min = 3;
+            max = 5;
+            break;
+        }
+        case 8:// many small enemies
+        {
+            min = 8;
+            max = 11;
+        }
+        case 9://cyclops
+        {
+            min = max = 2;
+        }
+        case 10://dragon
+        {
+            min = max = 1;
+        }
+    }
+
+    return GenRandNum(min,max);
 }
 
 int EnemyGenerator::GenRandNum(int min, int max)
@@ -27,18 +150,6 @@ int EnemyGenerator::GenRandNum(int min, int max)
     std::uniform_int_distribution<uint16_t> roller(min, max);
 
     return roller(generator);
-}
-
-EnemyType EnemyGenerator::GenEnemyType()
-{
-    auto var = GenRandNum(1,10);
-
-    if (var > 0 && var <= 5)
-        return EnemyType::GOBLIN;
-    else if (var > 5 && var <= 9)
-        return EnemyType::SKELETON;
-    else
-        return EnemyType::WRAITH;
 }
 
 int EnemyGenerator::GenEnemyHP(EnemyType type)

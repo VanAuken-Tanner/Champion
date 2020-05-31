@@ -9,7 +9,9 @@ enum EnemyType
 {
     SKELETON,
     GOBLIN,
-    WRAITH
+    WRAITH,
+    CYCLOPS,
+    DRAGON
 };
 
 

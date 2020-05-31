@@ -252,7 +252,7 @@ void BattleManager::CommitCommand(COMMAND command)
 void BattleManager::DisplayPlayer()
 {
     GraphicsManager::PrintLine();
-    std::cout << player_->GetName() << ":" << std::endl;
+    std::cout << player_->GetName() << "(" << player_->GetRoleName() << "):" << std::endl;
     std::cout << "HP(" << player_->GetCurrentHP() << "/" << player_->GetMaxHP() << ")" << std::endl;
     GraphicsManager::PrintLine();
 }
@@ -260,6 +260,7 @@ void BattleManager::DisplayPlayer()
 //main dislpay for enemies
 void BattleManager::DisplayEnemies()
 {
+    std::cout << "ENEMIES:" << std::endl;
     for(int i = 0; i < enemies_->size(); i++)
     {
         Enemy* pEnemy = &enemies_->at(i);

@@ -35,6 +35,47 @@ void GraphicsManager::MilliWait(int nanoSeconds)
     std::this_thread::sleep_for(std::chrono::milliseconds(nanoSeconds));
 }
 
+void GraphicsManager::Opening()
+{
+    GraphicsManager::RefreshPage();
+    PrintLine();
+    std::cout << "Champion!" << std::endl;
+    PrintLine();
+    std::cout << "Loading." << std::endl;
+    MilliWait(2000);
+    GraphicsManager::RefreshPage();
+    PrintLine();
+    std::cout << "Champion!" << std::endl;
+    PrintLine();
+    std::cout << "Loading.." << std::endl;
+    MilliWait(1000);
+    GraphicsManager::RefreshPage();
+    PrintLine();
+    std::cout << "Champion!" << std::endl;
+    PrintLine();
+    std::cout << "Loading..." << std::endl;
+    MilliWait(1000);
+    GraphicsManager::RefreshPage();
+    PrintLine();
+    std::cout << "Champion!" << std::endl;
+    PrintLine();
+    std::cout << "Loading...." << std::endl;
+    MilliWait(250);
+    GraphicsManager::RefreshPage();
+    PrintLine();
+    std::cout << "Champion!" << std::endl;
+    PrintLine();
+    std::cout << "Loading....." << std::endl;
+    MilliWait(250);
+    GraphicsManager::RefreshPage();
+    PrintLine();
+    std::cout << "Champion!" << std::endl;
+    PrintLine();
+    std::cout << "Loading......" << std::endl;
+    MilliWait(100);
+    GraphicsManager::RefreshPage();
+}
+
 void GraphicsManager::PrintCombat(bool success, bool isplayer, std::string attacker, std::string defender, int dmg)
 {
     GraphicsManager::RefreshPage();

@@ -2,6 +2,10 @@
 
 #include <iostream>
 
+Character::Character()
+{
+
+}
 
 void Character::printProfile()
 {

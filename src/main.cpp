@@ -13,37 +13,60 @@
 //gets to fight hordes of baddies!
 
 //MAIN TODO
-//random enemy generation
-//eliminating multiple enemies
-//player choosing which enemy to attack
+//Create player classes and abilities
+//Create player attack that utilizes random damage + modifiers.
+//add armor to characters
+
+//create difficulty system (levels)
+
+bool Continue()
+{
+    std::cout << "Continue?..." << std::endl;
+    std::string input;
+    std::cin >> input;
+
+    if(input == "end")
+        return false;
+    
+    GraphicsManager::RefreshPage();
+    return true;
+}
+
 
 int main(int argc, char *argv[])
 {
 
     bool running = true;
-    std::cout << "battle begin!" << std::endl;
+    int level = 1;
+    GraphicsManager::Opening();
 
-    Player player("Tanner", 100, 20, 30);
-    player.printProfile();
+    Player player;
+    //player.printProfile();
+    //running = Continue();
 
     while (running)
     {
+        std::cout << "Loading..." << std::endl;
+        GraphicsManager::MilliWait(1000);
+        GraphicsManager::RefreshPage();
+        GraphicsManager::PrintLine();
+        std::cout << "Now beggining level: " << level << std::endl;
+        GraphicsManager::PrintLine();
+        GraphicsManager::MilliWait(2500);
+        GraphicsManager::RefreshPage();
+
         std::vector<Enemy> enemies;
-        EnemyGenerator::GenerateEnemies(enemies);
-        
+        EnemyGenerator::GenerateEnemies(enemies, level);
+
         BattleManager battler;
         battler.CreateBattle(player,enemies);
         battler.CommenceBattle();
         
-        
-        std::cout << "MAIN GAME INPUT" << std::endl;
-        std::string input;
-        std::cin >> input;
-        if(input == "end")
-            running = false;
-        else
-            GraphicsManager::RefreshPage();
-        
+    
+        level++;        
+        player.FullHeal();
+
+        running = Continue(); 
     }
 
 }

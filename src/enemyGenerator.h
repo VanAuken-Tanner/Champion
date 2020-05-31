@@ -26,16 +26,30 @@
 #define WRAITH_MIN_SPD      11
 #define WRAITH_MAX_SPD      16
 
+#define CYCLOPS_MIN_HP      25
+#define CYCLOPS_MAX_HP      38
+#define CYCLOPS_MIN_STR     21
+#define CYCLOPS_MAX_STR     26
+#define CYCLOPS_MIN_SPD     13
+#define CYCLOPS_MAX_SPD     19
+
+#define DRAGON_MIN_HP       35
+#define DRAGON_MAX_HP       50
+#define DRAGON_MIN_STR      24
+#define DRAGON_MAX_STR      31
+#define DRAGON_MIN_SPD      28
+#define DRAGON_MAX_SPD      35
 
 class EnemyGenerator
 {
 
 public:
-    static void GenerateEnemies(std::vector<Enemy>& vEnemies);
+    static void GenerateEnemies(std::vector<Enemy>& vEnemies, int level);
     static void GenerateSomeRandomNumbers();
 private:
+    static int GenerateEnemiesForLevel(int level);
     static int GenRandNum(int min, int max);
-    static EnemyType GenEnemyType();
+    static Enemy GenEnemy(EnemyType type);
     static int GenEnemyHP(EnemyType type);
     static int GenEnemySTR(EnemyType type);
     static int GenEnemySPD(EnemyType type);

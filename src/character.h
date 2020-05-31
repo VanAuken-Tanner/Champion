@@ -6,6 +6,7 @@
 class Character
 {
 public:
+    Character();
     Character(int hp, int strength, int speed) : hpcur_{hp}, hpmax_{hp}, strength_{strength}, speed_{speed} {}
 
     int GetCurrentHP() {return hpcur_;};
