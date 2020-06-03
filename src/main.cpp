@@ -9,6 +9,9 @@
 #include "enemyGenerator.h"
 #include "graphicsManager.h"
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
 //Welcome to Battle! A simple battle game in which our hero (you)
 //gets to fight hordes of baddies!
 
@@ -37,6 +40,25 @@ bool Continue()
 
 int main(int argc, char *argv[])
 {
+
+    if (SDL_Init(SDL_INIT_EVERYTHING) > 0)
+    {
+        std::cout << "SDL Failed to init everything...  err:" << SDL_GetError() << std::endl;
+    }
+    else
+    {
+        std::cout << "SDL Init success..." << std::endl;
+    }
+    
+    if(!IMG_Init(IMG_INIT_PNG))
+    {
+        std::cout << "SDL Image failed to init png...  err:" << SDL_GetError() << std::endl;
+    }
+    else
+    {
+        std::cout << "SDL Image success..." << std::endl;
+    }
+    
 
     bool running = true;
     int level = 1;

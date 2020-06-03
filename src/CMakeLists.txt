@@ -2,4 +2,4 @@ add_library(primary character.cpp player.cpp enemy.cpp enemyGenerator.cpp battle
 
 add_executable(game main.cpp)
 
-target_link_libraries(game primary)
+target_link_libraries(game primary ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
