@@ -8,6 +8,7 @@
 #include "battleManager.h"
 #include "enemyGenerator.h"
 #include "graphicsManager.h"
+#include "game.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -38,59 +39,64 @@ bool Continue()
 }
 
 
+Game* game = nullptr;
+
 int main(int argc, char *argv[])
 {
+    game = new Game();
+    game->Init("Champion",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    while (game->Running())
+    {
+        game->HandleEvents();
+        game->Update();
+        game->Render();
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) > 0)
-    {
-        std::cout << "SDL Failed to init everything...  err:" << SDL_GetError() << std::endl;
+
     }
-    else
-    {
-        std::cout << "SDL Init success..." << std::endl;
-    }
+
+    game->Clean();
+
+    return 0;
+}
+
+
+
+// int main(int argc, char *argv[])
+// {
+
     
-    if(!IMG_Init(IMG_INIT_PNG))
-    {
-        std::cout << "SDL Image failed to init png...  err:" << SDL_GetError() << std::endl;
-    }
-    else
-    {
-        std::cout << "SDL Image success..." << std::endl;
-    }
-    
 
-    bool running = true;
-    int level = 1;
-    GraphicsManager::Opening();
+//     bool running = true;
+//     int level = 1;
+//     GraphicsManager::Opening();
+//     Continue();
+//     Player player;
+//     player.printProfile();
+//     Continue();
 
-    Player player;
-    player.printProfile();
-    Continue();
+//     while (running)
+//     {
+//         std::cout << "Loading..." << std::endl;
+//         GraphicsManager::MilliWait(1000);
+//         GraphicsManager::RefreshPage();
+//         GraphicsManager::PrintLine();
+//         std::cout << "Now beggining level: " << level << std::endl;
+//         GraphicsManager::PrintLine();
+//         GraphicsManager::MilliWait(2500);
+//         GraphicsManager::RefreshPage();
 
-    while (running)
-    {
-        std::cout << "Loading..." << std::endl;
-        GraphicsManager::MilliWait(1000);
-        GraphicsManager::RefreshPage();
-        GraphicsManager::PrintLine();
-        std::cout << "Now beggining level: " << level << std::endl;
-        GraphicsManager::PrintLine();
-        GraphicsManager::MilliWait(2500);
-        GraphicsManager::RefreshPage();
+//         std::vector<Enemy> enemies;
+//         EnemyGenerator::GenerateEnemies(enemies, level);
 
-        std::vector<Enemy> enemies;
-        EnemyGenerator::GenerateEnemies(enemies, level);
-
-        BattleManager battler;
-        battler.CreateBattle(player,enemies);
-        battler.CommenceBattle();
+//         BattleManager battler;
+//         battler.CreateBattle(player,enemies);
+//         battler.CommenceBattle();
         
     
-        level++;        
-        player.FullHeal();
+//         level++;        
+//         player.FullHeal();
 
-        running = Continue(); 
-    }
+//         running = Continue(); 
+//     }
 
-}
+// }
