@@ -45,12 +45,31 @@ int main(int argc, char *argv[])
 {
     game = new Game();
     game->Init("Champion",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
-    while (game->Running())
+
+
+    const int FPS = 60;//how many frames we want in a second                        
+    const int frameTargetTime = 1000 / FPS; //a frame should take 16 milliseconds
+    Uint32 frameStart = 0;
+    int frameTime = 0;
+
+    
+    while (game->State() != GAME_STATE::END)
     {
+
+        frameStart = SDL_GetTicks();//milliseconds since sdl init
+
+
+
         game->HandleEvents();
         game->Update();
         game->Render();
 
+        frameTime = SDL_GetTicks() - frameStart; //milliseconds our game took to loop
+
+        if(frameTargetTime > frameTime)//if our frame time is less than our inteded frame time, delay by the difference.
+        {
+            SDL_Delay(frameTargetTime - frameTime);
+        }
 
     }
 

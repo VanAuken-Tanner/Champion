@@ -1,5 +1,5 @@
 #This is a baisc example of the root CMakeLists.txt
-project(Battle!)
+project(Champion)
 cmake_minimum_required(VERSION 3.0)
 message(STATUS "gettingSDL")
 
@@ -14,3 +14,4 @@ message(STATUS "!!!!!!!!!!!!====!!!!!!!!!${PROJECT_SOURCE_DIR}")
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
+add_subdirectory(${PROJECT_SOURCE_DIR}/res)

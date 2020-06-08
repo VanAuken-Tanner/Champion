@@ -1,6 +1,9 @@
 #include "game.h"
 
 
+SDL_Rect srcRect,destRect;
+    
+
 Game::Game()
 {
 
@@ -32,14 +35,30 @@ void Game::Init(std::string title, int xpos, int ypos, int width, int height, bo
         {
             SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
             std::cout << "Renderer created..." << std::endl;
+
+            
+            //create our background
+            pBackGround = TextureManager::LoadTexture("res/BasicBackground.png", renderer_);
+            //create our player
+            pPlayerTexture = TextureManager::LoadTexture("res/Paladin.png", renderer_);
+
+            srcRect.h = 32;
+            srcRect.w = 32;
+            destRect.h = 64;
+            destRect.w = 64;
+            destRect.x = 100;
+            destRect.y = 100;
         }
 
-        isRunning_ = true;
+        game_state_ = GAME_STATE::MENU;
         count_ = 0;
+
+         
+        
     }
     else
     {
-        isRunning_ = false;
+        game_state_ = GAME_STATE::END;
         std::cout << "SDL Failed to init everything...  err:" << SDL_GetError() << std::endl;
 
     }
@@ -62,7 +81,7 @@ void Game::HandleEvents()
     switch (event.type)
     {
     case SDL_QUIT:
-        isRunning_ = false;
+        game_state_ = GAME_STATE::END;
         break;
     
     default:
@@ -72,13 +91,16 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+    
     count_++;
-    std::cout << count_ << std::endl;
+    //std::cout << count_ << std::endl;
 }
 
 void Game::Render()
 {
     SDL_RenderClear(renderer_);
+    SDL_RenderCopy(renderer_, pBackGround, NULL, NULL);
+    SDL_RenderCopy(renderer_, pPlayerTexture, &srcRect, &destRect);
     SDL_RenderPresent(renderer_);
 }
 

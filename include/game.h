@@ -6,6 +6,16 @@
 #include <iostream>
 #include <string>
 
+#include "textureManager.h"
+
+enum GAME_STATE
+{
+    MENU,
+    ADVENTURE,
+    BATTLE,
+    END
+
+};
 
 class Game
 {
@@ -20,10 +30,9 @@ public:
     void Render();
     void Clean();
 
-    bool Running() {return isRunning_;};
-
+    GAME_STATE State() {return game_state_;};
 private:
-    bool isRunning_;
+    GAME_STATE game_state_;
 
     int count_;
 
@@ -31,4 +40,8 @@ private:
     SDL_Renderer *renderer_;
 
 
+    //Textures
+    SDL_Texture* pBackGround;
+    SDL_Texture* pPlayerTexture;
+    
 };
