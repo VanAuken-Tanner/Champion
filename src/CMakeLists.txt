@@ -1,4 +1,4 @@
-add_library(primary game.cpp character.cpp player.cpp enemy.cpp enemyGenerator.cpp battleManager.cpp graphicsManager.cpp dice.cpp textureManager.cpp)
+add_library(primary game.cpp character.cpp player.cpp enemy.cpp enemyGenerator.cpp battleManager.cpp graphicsManager.cpp dice.cpp textureManager.cpp gameObject.cpp)
 
 add_executable(game main.cpp)
 

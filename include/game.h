@@ -7,6 +7,8 @@
 #include <string>
 
 #include "textureManager.h"
+#include "BATTLE_POS.h"
+
 
 enum GAME_STATE
 {
@@ -30,18 +32,14 @@ public:
     void Render();
     void Clean();
 
+    static SDL_Renderer * renderer_g;
+
     GAME_STATE State() {return game_state_;};
 private:
     GAME_STATE game_state_;
-
-    int count_;
-
     SDL_Window *window_;
-    SDL_Renderer *renderer_;
-
 
     //Textures
     SDL_Texture* pBackGround;
-    SDL_Texture* pPlayerTexture;
-    
+    SDL_Texture* pTextBox;  
 };
